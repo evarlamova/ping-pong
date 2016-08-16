@@ -41,8 +41,11 @@ public class SimpleExecutor implements RequestExecutor {
     public void execute(HttpRequest request, HttpResponse response) throws IOException {
         reader.read(request);
         Pair<HttpMethod, String> requestMappingPair = Pair.of(request.getMethod(), request.getUri());
-        Triple<Method, Object, List<Object>> mapping = controllerMapping.get(request.getMethod())
-                .getMapping(new ArrayDeque<>(Arrays.asList(request.getUri().split("/"))), new LinkedList<>());
+        Mapping methodMapping = controllerMapping.get(request.getMethod());
+        Triple<Method, Object, List<Object>> mapping = null;
+        if (methodMapping != null) {
+            mapping = methodMapping.getMapping(new ArrayDeque<>(Arrays.asList(request.getUri().split("/"))), new LinkedList<>());
+        }
         String result = "";
         try {
             if (mapping != null) {

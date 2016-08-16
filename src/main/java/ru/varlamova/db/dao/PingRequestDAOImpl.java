@@ -1,4 +1,4 @@
-package ru.varlamova.dao;
+package ru.varlamova.db.dao;
 
 import com.mongodb.*;
 import ru.varlamova.entity.PingRequest;

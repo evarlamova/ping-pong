@@ -28,7 +28,7 @@ public class SimpleResponseWriter implements ResponseWriter {
     }
 
     private String convertStartingLineToResponse(HttpStatus httpStatus) {
-        return HttpConstants.DEFAULT_PROTOTCOL_VERSION + " "
+        return HttpConstants.DEFAULT_PROTOCOL_VERSION + " "
                 + httpStatus.getHttpCode() + " "
                 + httpStatus.getMetssageString();
     }

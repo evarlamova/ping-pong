@@ -24,32 +24,26 @@ import static org.apache.commons.io.IOUtils.buffer;
 class SimpleHttpServer {
 
     private static final Logger log = Logger.getLogger(SimpleHttpServer.class.getName());
-    private static final String DEFAULT_PROPERTY_FILE_PATH = "server.properties";
     private static final String DEFAULT_CONTROLLERS_PATH = "ru.varlamova.controller.commands";
     private int port;
     private final Lock startLock = new ReentrantLock();
     private RequestExecutor requestExecutor;
 
-
     SimpleHttpServer() {
-        Properties prop = System.getProperties();
-        try (InputStream propertyStream = getClass().getClassLoader().getResourceAsStream(DEFAULT_PROPERTY_FILE_PATH)) {
-            prop.load(propertyStream);
+        try {
+            Properties prop = System.getProperties();
             this.port = Integer.parseInt(prop.getProperty("server.port"));
             this.requestExecutor = new SimpleExecutor(DEFAULT_CONTROLLERS_PATH);
         } catch (NumberFormatException ex) {
             throw new ServerException("Port should have INTEGER value, check server.properties");
-        } catch (IOException e) {
-            throw new ServerException("Can't instantiate server, please create config file server.properties at classpath");
         }
     }
 
     void start() {
         if (startLock.tryLock()) {
-            startLock.lock();
-            log.info("=======Starting server at port " + port + "=======");
-            ExecutorService connectionPool = Executors.newFixedThreadPool(100);
             try (ServerSocket socket = new ServerSocket(this.port)) {
+                log.info("=======Starting server at port " + port + "=======");
+                ExecutorService connectionPool = Executors.newFixedThreadPool(100);
                 while (true) {
                     try {
                         connectionPool.submit(new ConnectionTask(socket.accept()));

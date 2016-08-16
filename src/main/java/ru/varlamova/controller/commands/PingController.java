@@ -3,8 +3,8 @@ package ru.varlamova.controller.commands;
 
 import ru.varlamova.controller.meta.Controller;
 import ru.varlamova.controller.meta.RequestMapping;
-import ru.varlamova.dao.PingRequestDAO;
-import ru.varlamova.dao.PingRequestDAOImpl;
+import ru.varlamova.db.dao.PingRequestDAO;
+import ru.varlamova.db.dao.PingRequestDAOImpl;
 import ru.varlamova.entity.PingRequest;
 import ru.varlamova.http.enums.HttpMethod;
 
