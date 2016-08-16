@@ -1,5 +1,5 @@
 # ping-pong
-Тестовое задания для Glu Mobile.
+Тестовое задание для Glu Mobile.
 <p>1) Для сборки необходим maven, mvn compile и запустить из командной строки Initializer класс в папке с скомпилированными сырцами.
 Или же открыть в IDE сбилдить mavenом и запустить main class в Initializer.java.
 База данных Монго, поднимается как Embedded контейнер(решения взяла тут https://github.com/flapdoodle-oss/de.flapdoodle.embed.mongo)</p>
